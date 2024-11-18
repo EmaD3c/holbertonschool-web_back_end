@@ -1,9 +1,9 @@
-export default function getListStudentIds(objet_student) {
+export default function getListStudentIds(objetstudent) {
   // verrifie que l'objet est un tableau
-  if (!Array.isArray(objet_student)){
-    return[]
+  if (!Array.isArray(objetstudent)) {
+    return [];
   }
 
   // map cree un tableau avec les id des students
-  return objet_student.map(student => student.id);
+  return objetstudent.map((student) => student.id);
 }
