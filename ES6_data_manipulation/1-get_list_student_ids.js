@@ -1,4 +1,4 @@
-export default function getListStudents(objet_student) {
+export default function getListStudentIds(objet_student) {
   // verrifie que l'objet est un tableau
   if (!Array.isArray(objet_student)){
     return[]
