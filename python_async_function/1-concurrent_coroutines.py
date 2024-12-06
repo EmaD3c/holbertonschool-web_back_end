@@ -15,19 +15,5 @@ async def wait_n(n: int, max_delay: int) -> List[float]:
     Exécute wait_random n fois avec max_delay
     et return la liste des délais triés
     """
-
-    if n <= 0:
-        return []  # garer le cas ou n <= 0
-
-    # cree une liste de taches
-    tasks = [asyncio.create_task(wait_random(max_delay)) for _ in range(n)]
-
-    # liste qui stock le resultat
-    results = []
-
-    # attendre la fin des taches
-    for completed_task in asyncio.as_completed(tasks):
-        delay = await completed_task  # prendre le resultat
-        insort(results, delay)  # insere a la bonne position avec bisect
-
-    return results
+    tasks = [wait_random(max_delay) for _ in range(n)]
+    return [await task for task in asyncio.as_completed(tasks)]
