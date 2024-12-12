@@ -1,2 +1,2 @@
 // Trying to just show name property
-db.mycollection.find({});
+db.school.find({})
