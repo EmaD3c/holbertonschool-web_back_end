@@ -1,0 +1,2 @@
+// Trying to just show name Holberton school
+db.mycollection.find({"name": "Holberton school"});
