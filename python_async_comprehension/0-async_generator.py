@@ -2,12 +2,12 @@
 """
 Async Generator
 """
-from typing import AsyncGenerator
+from typing import Generator
 import asyncio
 import random
 
 
-async def async_generator() -> AsyncGenerator[int, None]:
+async def async_generator() -> Generator[float, None, None]:
     """
     coroutine that takes no arguments.
     The coroutine will loop 10 times
