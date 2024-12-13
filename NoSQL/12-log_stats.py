@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """
-Statistiques sur les logs Nginx stockés dans MongoDB.
+Log stats
 """
 
 from pymongo import MongoClient
 
 def log_stats():
     """
-    Affiche les statistiques de base sur les logs Nginx.
+    affiche les statistiques de base sur les logs nginx
     """
     # connexion a mongodb
     client = MongoClient()  # Connexion par défaut à mongodb://127.0.0.1:27017
