@@ -5,6 +5,6 @@ process.stdin.on('data', data => {
 
 // fin du programme
 process.stdin.on('end', () => {
-  console.log("This important software is now closing");
+  console.log("This important software is now closing\n");
 });
 });
