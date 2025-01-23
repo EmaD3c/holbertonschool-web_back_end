@@ -12,7 +12,7 @@ function countStudents(path) {
         throw new Error('File does not contain valid data');
       }
 
-      const students = lines.slice(1);
+      const students = lines.slice(1); // ignorer l'en tete
       const fields = {};
 
       students.forEach((student) => {

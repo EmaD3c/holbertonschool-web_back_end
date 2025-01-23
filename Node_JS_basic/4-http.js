@@ -1,6 +1,5 @@
 const http = require('http');
 
-// Hôte et port du serveur
 const port = 1245;
 
 const requestListener = (req, res) => {
@@ -11,6 +10,7 @@ const requestListener = (req, res) => {
 
 const app = http.createServer(requestListener);
 
+// start le serv
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
