@@ -53,7 +53,7 @@ const requestListener = async (req, res) => {
     res.setHeader('Content-Type', 'text/plain');
 
     try {
-      const databasePath = process.argv[2]; // 
+      const databasePath = process.argv[2];
       // chemin du fichier passr en argument
       const studentData = await countStudents(databasePath);
 
