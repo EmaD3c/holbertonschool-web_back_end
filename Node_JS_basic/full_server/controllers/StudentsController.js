@@ -1,9 +1,9 @@
-const readDatabase = require('../utils'); // pour lire la databse
+import readDatabase from '../utils.js';
 
-class StudentsController {
+export default class StudentsController {
   static async getAllStudents(req, res) {
     try {
-      const studentsData = await readDatabase(process.argv[2]); // chemin vers le fichier de base databse
+      const studentsData = await readDatabase(process.argv[2]);
       const fields = Object.keys(studentsData).sort((a, b) =>
         a.toLowerCase().localeCompare(b.toLowerCase())
       );
@@ -21,7 +21,7 @@ class StudentsController {
   }
 
   static async getAllStudentsByMajor(req, res) {
-    const { major } = req.params; // recup depui slurl la parametre major
+    const { major } = req.params;
 
     if (major !== 'CS' && major !== 'SWE') {
       res.status(500).send('Major parameter must be CS or SWE');
@@ -29,7 +29,7 @@ class StudentsController {
     }
 
     try {
-      const studentsData = await readDatabase(process.argv[2]); // chemin vers le fichier de base databse
+      const studentsData = await readDatabase(process.argv[2]);
       const students = studentsData[major] || [];
 
       const result = `List: ${students.join(', ')}`;
@@ -39,5 +39,3 @@ class StudentsController {
     }
   }
 }
-
-module.exports = StudentsController;
