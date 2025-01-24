@@ -49,9 +49,6 @@ app.get('/', (req, res) => {
 
 app.get('/students', async (req, res) => {
   const database = process.argv[2];
-  if (!database) {
-    return res.status(500).send('Database file path is missing');
-  }
 
   try {
     const studentsData = await countStudents(database);
