@@ -1,58 +1,57 @@
 const express = require('express');
-const fs = require('fs');
-const util = require('util');
+const fs = require('fs').promises;
 
 const app = express();
 const port = 1245;
 
-// convertion de fs.readfile en asynchrone
-const readFileAsync = util.promisify(fs.readFile);
-
-// lire csv
 async function countStudents(database) {
   try {
-    const content = await readFileAsync(database, 'utf8');
-    const lines = content
-      .split('\n')
-      .filter((line) => line.trim() !== '');
+    const data = await fs.readFile(database, 'utf8');
+    console.log('data:', data);
 
-    if (lines.length <= 1) throw new Error('Database is empty');
+    const lines = data.split('\n')
+      .filter(line => line.trim() !== '')
+      .slice(1); // delete len tete
 
-    lines.shift(); // remove header
-    const students = lines
-      .map((line) => line.split(','))
-      .filter((cols) => cols.length === 4);
+    console.log('lignes:', lines);
 
-    const fields = {};
-    students.forEach(([firstname, field]) => {
-      if (!fields[field]) fields[field] = [];
-      fields[field].push(firstname.trim());
-    });
+    const students = lines.map(line => line.split(','))
+      .filter(student => student.length === 4);
 
-    const totalStudents = students.length;
-    let result = `Number of students: ${totalStudents}\n`;
+    console.log('Students:', students);
 
-    for (const [field, names] of Object.entries(fields)) {
-      result += `Number of students in ${field}: ${names.length}. List: ${names.join(', ')}\n`;
-    }
+    const studentsByField = students.reduce((acc, [firstName, , , field]) => {
+      // delete white space
+      const trimmedField = field.trim();
+      if (!acc[trimmedField]) acc[trimmedField] = [];
+      acc[trimmedField].push(firstName);
+      return acc;
+    }, {});
 
-    return result.trim();
+    console.log('Students par domaine:', studentsByField);
+
+    const csStudents = studentsByField['CS'] || [];
+    const sweStudents = studentsByField['SWE'] || [];
+
+    let result = `Number of students: ${students.length}\n`;
+    result += `Number of students in CS: ${csStudents.length}. List: ${csStudents.join(', ')}\n`;
+    result += `Number of students in SWE: ${sweStudents.length}. List: ${sweStudents.join(', ')}`;
+
+    return result;
   } catch (error) {
+    console.error('Error:', error);
     throw new Error('Cannot load the database');
   }
 }
 
-// endpoint principal
 app.get('/', (req, res) => {
   res.send('Hello Holberton School!');
 });
 
-// endpoint students
 app.get('/students', async (req, res) => {
-  const database = process.argv[2]; // recupere le chemin vers la database grace a l'argument
+  const database = process.argv[2];
   if (!database) {
-    res.status(500).send('Database file path is missing');
-    return;
+    return res.status(500).send('Database file path is missing');
   }
 
   try {
@@ -63,9 +62,8 @@ app.get('/students', async (req, res) => {
   }
 });
 
-// cree le serveur
 app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+  console.log(`Server running on port ${port}`);
 });
 
 module.exports = app;
