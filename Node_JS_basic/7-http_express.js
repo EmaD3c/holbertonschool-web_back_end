@@ -14,15 +14,14 @@ async function countStudents(database) {
     const content = await readFileAsync(database, 'utf8');
     const lines = content
       .split('\n')
-      .filter((line) => line.trim() !== ''); // delete les lignes vides
+      .filter((line) => line.trim() !== '');
 
-    // Vérifiez qu'il y a au moins une ligne pour l'en-tête
     if (lines.length <= 1) throw new Error('Database is empty');
 
-    lines.shift(); // delete l'en tete
+    lines.shift(); // remove header
     const students = lines
       .map((line) => line.split(','))
-      .filter((cols) => cols.length === 4); // filtrer les lignes vide
+      .filter((cols) => cols.length === 4);
 
     const fields = {};
     students.forEach(([firstname, field]) => {
