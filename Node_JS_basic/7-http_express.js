@@ -39,7 +39,6 @@ async function countStudents(database) {
 
     return result;
   } catch (error) {
-    console.error('Error:', error);
     throw new Error('Cannot load the database');
   }
 }
