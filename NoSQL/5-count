@@ -1,2 +1,0 @@
-// count document
-db.school.count()

@@ -1,2 +1,0 @@
-// Trying to just show name property
-db.school.find({})

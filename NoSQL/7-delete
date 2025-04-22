@@ -1,2 +1,0 @@
-// delete all document with a certain name
-db.school.deleteMany({ "name": "Holberton school" });
