@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
-ADD
+concat
 """
 
 
-def add(a: float, b: float) -> float:
+def concat(str1: str, str2: str) -> str:
     """
-    ADD
+    concat
     """
-    return a + b
+    return str1 + str2
