@@ -2,11 +2,11 @@
 """
 to_kv
 """
-from typing import List, Union, Tuple
+from typing import List, Union, Tuple, Sequence, Iterable
 
 
-def to_kv(k: str, v: Union[int, float]) -> Tuple[str, float]:
+def element_length(lst: Iterable[Sequence]) -> List[Tuple[Sequence, int]]:
     """
     to_kv
     """
-    return k, v**2
+    return [(i, len(i)) for i in lst]
