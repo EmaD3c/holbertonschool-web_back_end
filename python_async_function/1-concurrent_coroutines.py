@@ -12,12 +12,9 @@ async def wait_n(n: int, max_delay: int = 10) -> List[float]:
     """
     async
     """
-
-    if max_delay <= 0:
-        max_delay = 1  # empech er que le delais soit 0
     delays = []  # cree une list vide
 
-    for i in range(n):  # ajouter les resultat
+    for _ in range(n):  # ajouter les resultat
         delay = await wait_random(max_delay)
         delays.append(delay)
 
