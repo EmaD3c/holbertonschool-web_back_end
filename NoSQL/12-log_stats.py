@@ -2,6 +2,7 @@
 """
 nosql
 """
+from pymongo import MongoClient
 
 
 def log_stat():
