@@ -4,8 +4,8 @@ nosql
 """
 
 
-def update_topics(mongo_collection, name, topics):
+def schools_by_topic(mongo_collection, topic):
     """
-    change all in school based on name
+     returns the list of school having a specific topic
     """
-    mongo_collection.update_many({"name": name}, {"$set": {"topics": topics}})
+    return mongo_collection.find({"topics": topic})
